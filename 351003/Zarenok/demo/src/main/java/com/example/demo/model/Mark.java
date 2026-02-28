@@ -11,14 +11,14 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
-@Table(name = "marks")
+@Table(name = "tbl_mark", schema = "distcomp")
 public class Mark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name", unique = true, nullable = false, length = 32)
     private String name;
-    private ZonedDateTime created;
-    private ZonedDateTime modified;
 
     @ManyToMany(mappedBy = "marks")
     private Set<Issue> issues = new HashSet<>();

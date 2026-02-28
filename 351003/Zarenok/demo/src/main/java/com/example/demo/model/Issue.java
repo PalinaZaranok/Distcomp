@@ -13,15 +13,25 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
-@Table(name = "issues")
+@Table(name = "tbl_issue", schema = "distcomp")
 public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "author_id", nullable = false)
     private Long authorId;
+
+    @Column(name = "title", nullable = false, length = 64)
     private String title;
+
+    @Column(name = "content")
     private String content;
+
+    @Column(name = "created")
     private ZonedDateTime created;
+
+    @Column(name = "modified")
     private ZonedDateTime modified;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,7 +43,7 @@ public class Issue {
 
     @ManyToMany
     @JoinTable(
-            name = "issue_marks",
+            name = "tbl_issue_mark",
             joinColumns = @JoinColumn(name = "issue_id"),
             inverseJoinColumns = @JoinColumn(name = "mark_id")
     )
